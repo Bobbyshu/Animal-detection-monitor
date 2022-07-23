@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <header class="header-wrapper main-header" th:fragment="title">
+        <div class="header-inner-wrapper">
+            <div class="logo-wrapper">
+                <a href="" class="admin-logo">
+                    <img th:src="@{/static/picture/logo.png}" alt="">
+                </a>
+            </div>
+            <div class="header-right">
+                <div class="header-left"></div>
+                <div class="header-controls">
+                    <div class="user-info-wrapper header-links">
+                        <a href="javascript:void(0);" class="user-info">
+                            <img th:src="@{/static/picture/user.jpg}" alt="" class="user-img">
+                            <div class="blink-animation">
+                                <span class="blink-circle"></span>
+                                <span class="main-circle"></span>
+                            </div>
+                        </a>
+                        <div class="user-info-box">
+                            <div class="drop-down-header">
+                                <h4 th:text="${user.getName()}">John Brown</h4>
+                                <p th:text="${user.getRole().equals('user') ? 'student' : 'admin'}">UI | UX Designer</p>
+                            </div>
+                            <ul>
+                                <li>
+                                    <a th:href="@{/api/auth/logout}">
+                                        <i class="fas fa-sign-out-alt"></i> logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Sidebar Start -->
+    <aside class="sidebar-wrapper" th:fragment="aside">
+        <div class="side-menu-wrap">
+            <ul class="main-menu">
+                <li sec:authorize="hasRole('admin')">
+                    <a th:href="@{/page/admin/index}">
+                                <span class="icon-menu feather-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                </span>
+                        <span class="menu-text">
+                                    Borrow Management
+                                </span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('admin')">
+                    <a th:href="@{/page/admin/book}">
+                                <span class="icon-menu feather-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                </span>
+                        <span class="menu-text">
+                                    Books Management
+                                </span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('user')">
+                    <a th:href="@{/page/user/index}">
+                                <span class="icon-menu feather-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                </span>
+                        <span class="menu-text">
+                                    Book Borrow
+                                </span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('user')">
+                    <a th:href="@{/page/user/book}">
+                                <span class="icon-menu feather-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                </span>
+                        <span class="menu-text">
+                                    Borrow Management
+                                </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+</body>
+</html>
